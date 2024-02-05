@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from . import main
-from .forms import EditProfileForm
+from .forms import EditProfileForm, EditProfileAdminForm
 from .. import db
 from ..models import User
 
@@ -35,5 +35,31 @@ def edit_profile():
     form.name.data = current_user.name
     form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', form=form)
+
+@main.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_profile_admin(id):
+    if current_user.is_admin:
+        user = User.query.get_or_404(id)
+        form = EditProfileAdminForm(user=user)
+        if form.validate_on_submit():
+            user.email = form.email.data
+            user.username = form.username.data
+            user.confirmed = form.confirmed.data
+            user.name = form.name.data
+            user.about_me = form.about_me.data
+            db.session.add(user)
+            db.session.commit()
+            flash('The profile has been updated.')
+            return redirect(url_for('.user', username=user.username))
+        form.email.data = user.email
+        form.username.data = user.username
+        form.confirmed.data = user.confirmed
+        form.name.data = user.name
+        form.about_me.data = user.about_me
+        return render_template('edit_profile.html', form=form, user=user)
+    else:
+        return('You are not allowed to access this page')
+
 
 
