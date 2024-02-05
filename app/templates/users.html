@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-    {%if current_user.is_admin %}
+{% if current_user.is_admin %}
     <h1 class="title">{% block title %} Users {% endblock %}</h1>
     <div class="content">
         <table class="table">
@@ -24,9 +24,8 @@
             {% endfor %}
             </tbody>
           </table>
-
     </div>
 {% else %}
-    You're not authenticated
-{% endif %} 
+You do not have permission to access this page
+{% endif %}
 {% endblock %}
