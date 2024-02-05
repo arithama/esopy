@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from . import db, login_manager
 from flask import current_app
 import jwt
-import datetime
+from datetime import datetime
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -13,6 +13,9 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
     is_admin = db.Column(db.Boolean, default=False)
+    name = db.Column(db.String(64))
+    about_me = db.Column(db.Text())
+    member_since = db.Column(db.DateTime(), default=datetime.utcnow)
 
     def generate_confirmation_token(self, expiration=600):
         reset_token = jwt.encode(
