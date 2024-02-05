@@ -20,4 +20,3 @@ def user(username):
     return render_template('user.html', user=user)
 
 
-
