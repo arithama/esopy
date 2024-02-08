@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
     SubmitField
-from wtforms.validators import InputRequired, Length, Email, Regexp
+from wtforms.validators import InputRequired, Length, Email, Regexp, DataRequired
 from wtforms import ValidationError
+from flask_pagedown.fields import PageDownField
 from ..models import User
 
 class EditProfileForm(FlaskForm):
@@ -35,3 +36,8 @@ class EditProfileAdminForm(FlaskForm):
         if field.data != self.user.username and \
                 User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
+        
+class PostForm(FlaskForm):
+    title = TextAreaField("What is the title of your story?", validators = [DataRequired()])
+    body = PageDownField("What story do you want to tell?", validators=[DataRequired()])
+    submit = SubmitField('Submit')
