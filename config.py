@@ -15,10 +15,11 @@ class Config:
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ## alterar as variáveis abaixo (flasky) depois de criar nome para app
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    ESOPY_MAIL_SUBJECT_PREFIX = '[Esopy]'
+    ESOPY_MAIL_SENDER = 'Esopy Admin <esopy@example.com>'
+    ESOPY_ADMIN = os.environ.get('ESOPY_ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ESOPY_POSTS_PER_PAGE = os.environ.get('ESOPY_POSTS_PER_PAGE')
 
     @staticmethod
     def init_app(app):
