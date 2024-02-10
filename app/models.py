@@ -113,13 +113,15 @@ class User(UserMixin, db.Model):
     
     def follow(self, user):
         if not self.is_following(user):
-            f = Follow(followed=user)
-            self.followed.append(f)
+            f = Follow(follower=self, followed=user)
+            db.session.add(f)
+            db.session.commit()
 
     def unfollow(self, user):
         f = self.followed.filter_by(followed_id=user.id).first()
         if f:
-            self.followed.remove(f)
+            db.session.delete(f)
+            db.session.commit()
 
     def is_following(self, user):
         return self.followed.filter_by(
@@ -128,10 +130,6 @@ class User(UserMixin, db.Model):
     def is_followed_by(self, user):
         return self.followers.filter_by(
             follower_id=user.id).first() is not None
-
-
-
-
 
 @login_manager.user_loader
 def load_user(user_id):

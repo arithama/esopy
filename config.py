@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 load_dotenv()
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
-
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.googlemail.com')
@@ -20,6 +18,7 @@ class Config:
     ESOPY_ADMIN = os.environ.get('ESOPY_ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ESOPY_POSTS_PER_PAGE = os.environ.get('ESOPY_POSTS_PER_PAGE')
+    ESOPY_FOLLOWERS_PER_PAGE = os.environ.get('ESOPY_FOLLOWERS_PER_PAGE')
 
     @staticmethod
     def init_app(app):
