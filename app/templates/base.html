@@ -40,6 +40,9 @@
                     </a>
                     </li>
                 {% endif %}
+                {% if current_user.is_mod %}
+                    <li><a href="{{ url_for('main.moderate') }}">Moderate Comments</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
