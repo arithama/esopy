@@ -19,6 +19,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ESOPY_POSTS_PER_PAGE = os.environ.get('ESOPY_POSTS_PER_PAGE')
     ESOPY_FOLLOWERS_PER_PAGE = os.environ.get('ESOPY_FOLLOWERS_PER_PAGE')
+    ESOPY_COMMENTS_PER_PAGE = os.environ.get('ESOPY_COMMENTS_PER_PAGE')
 
     @staticmethod
     def init_app(app):

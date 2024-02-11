@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
 {% block title %} {{post.title}} {% endblock %}
 {% block page_content %}
 
@@ -12,6 +15,19 @@
     {% else %}
     {{ post.body }}
     {% endif %}
-    </div>
 </div>
+
+<h4 class="page-header">Comments</h4>
+{% if current_user.is_authenticated %}
+    <div class="comment-form">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endif %}
+{% include '_comments.html' %}
+{% if pagination %}
+    <div class="pagination">
+        {{ macros.pagination_widget(pagination, '.post', fragment='#comments', id=post.id) }}
+    </div>
+{% endif %}
+
 {% endblock %}

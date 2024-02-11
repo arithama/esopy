@@ -41,3 +41,7 @@ class PostForm(FlaskForm):
     title = TextAreaField("What is the title of your story?", validators = [DataRequired()])
     body = PageDownField("What story do you want to tell?", validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    body = StringField('Enter your comment', validators=[DataRequired()])
+    submit = SubmitField('Submit')

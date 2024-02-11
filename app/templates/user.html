@@ -17,6 +17,7 @@
         {% endif %}
         {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
         <p>Member since {{ moment(user.member_since).format('L') }}.</p>
+        <p>{{ user.comments.count() }} comments.</p>
         <p>{{ user.posts.count() }} blog posts.</p>
         <p>
             {% if current_user.is_authenticated and user != current_user %}
